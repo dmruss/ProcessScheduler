@@ -18,8 +18,13 @@ int main() {
 void ReadInput(std::string filename){
   std::ifstream infile(filename);
   int pid, arrival, burst, priority;
+  Queue* newProcessQueue = new Queue();
+
   while (infile >> pid >> arrival >> burst >> priority){
     PCB* temp = new PCB(pid, arrival, burst, priority);
-    temp->print();
+    newProcessQueue->Enqueue(temp);
+
+    //temp->print();
   }
+  newProcessQueue->print();
 }
