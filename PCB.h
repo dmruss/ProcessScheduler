@@ -1,6 +1,8 @@
 #ifndef PCB_HEAD
 #define PCB_HEAD
 
+#include <iostream>
+
 struct PCB {
   int pid;
   int arrival;
@@ -19,15 +21,19 @@ struct PCB {
     priority = 0;
   }
 
-  PCB(int pid; int arrival; int burst; int priority) {
+  PCB(int pid, int arrival, int burst, int priority) {
     this->pid = pid;
     this->arrival = arrival;
     this->burst = burst;
     this->priority = priority;
   }
 
+  void print() {
+    std::cout << pid << ' ' << arrival << ' ' << burst << ' ' << priority << '\n';
+  }
 
-}
+
+};
 
 
 #endif
