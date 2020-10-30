@@ -28,6 +28,20 @@ struct Queue {
     size = 0;
   }
 
+  /*Queue(const Queue &aQueue){
+    Node* temp = aQueue->front;
+
+    while (temp != NULL) {
+
+    }
+
+    if (front == NULL) {
+      rear = NULL;
+    }else {
+      rear = temp;
+    }
+  }*/
+
   void Enqueue(PCB* aPCB){
     Node* temp = new Node(aPCB);
     if (front == NULL) {
@@ -105,6 +119,72 @@ struct Queue {
   }
 };
 
+
+struct BurstPQueue : Queue {
+  BurstPQueue() {
+    front = NULL;
+    rear = NULL;
+    size = 0;
+  }
+
+  void Enqueue(PCB* aPCB) {
+    std::cout << "Calling enqueue\n";
+    Node* aNode = new Node(aPCB);
+    if (front == NULL) {
+      std::cout<< "enqueue check 1\n";
+      front = aNode;
+      front->next = NULL;
+      rear = front;
+    }
+    else if (front->data->burst > aNode->data->burst) {
+      aNode->next = front;
+      front = aNode;
+    }
+    else {
+      Node* temp = front;
+      while (temp->next != NULL && temp->next->data->burst < aNode->data->burst) {
+        temp = temp->next;
+      }
+      aNode->next = temp->next;
+      temp->next = aNode;
+      if (aNode->next == NULL) {
+        rear = aNode;
+      }
+    }
+    size += 1;
+  }
+
+};
+
+struct PriorityPQueue : Queue {
+  PriorityPQueue() {
+    front = NULL;
+    rear = NULL;
+    size = 0;
+  }
+
+  void Enqueue(PCB* aPCB) {
+    Node* aNode = new Node(aPCB);
+    if (front == NULL) {
+      front = aNode;
+      front->next = NULL;
+    }
+    else if (front->data->priority < aNode->data->priority) {
+      aNode->next = front;
+      front = aNode;
+    }
+    else {
+      Node* temp = front;
+      while (temp->next != NULL && temp->next->data->priority < aNode->data->priority) {
+        temp = temp->next;
+      }
+      aNode->next = temp->next;
+      temp->next = aNode;
+    }
+    size += 1;
+  }
+
+};
 
 
 
