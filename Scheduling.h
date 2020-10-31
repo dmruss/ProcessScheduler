@@ -105,26 +105,24 @@ Queue* SJF(Queue* newProcessQueue) {
 
 
     Node* addWaitTime = readyQueue->front;
-    std::cout << "ready queue size: " << readyQueue->size << "\n";
-    std::cout << "newprocess queue size: " << newProcessQueue->size << '\n';
+
     while (addWaitTime != NULL) {
-      std::cout << addWaitTime->data->pid << std::endl;
+      
       addWaitTime->data->wait += 0.5;
       addWaitTime = addWaitTime->next;
     }
-    std::cout << "check 7\n";
     time += 0.5;
 
     processesRemaining = (doneQueue->size != numProcesses);
 
-    std::cout << "Ready Queue\n";
+    /*std::cout << "Ready Queue\n";
     readyQueue->print();
     std::cout << "check 7\n";
     std::cout << "Running Queue\n";
     runningQueue->print();
     std::cout << "Done Queue\n";
     doneQueue->print();
-    std::cout << '\n';
+    std::cout << '\n';*/
   }
   return doneQueue;
 
@@ -171,7 +169,7 @@ Queue* PP(Queue* newProcessQueue) {
       newProcessQueue->deQueue();
 
 
-      std::cout<<"ARRIVES\n";
+      /*std::cout<<"ARRIVES\n";
       std::cout << "TIME: " << time << std::endl;
       std::cout << "Ready Queue\n";
       readyQueue->print();
@@ -179,7 +177,7 @@ Queue* PP(Queue* newProcessQueue) {
       runningQueue->print();
       std::cout << "Done Queue\n";
       doneQueue->print();
-      std::cout << '\n';
+      std::cout << '\n';*/
 
     }
     if (processFinished) {
@@ -190,7 +188,7 @@ Queue* PP(Queue* newProcessQueue) {
       runningQueueEmpty = true;
 
 
-      std::cout << "FINISHED\n";
+      /*std::cout << "FINISHED\n";
       std::cout << "TIME: " << time << std::endl;
 
       std::cout << "Ready Queue\n";
@@ -199,7 +197,7 @@ Queue* PP(Queue* newProcessQueue) {
       runningQueue->print();
       std::cout << "Done Queue\n";
       doneQueue->print();
-      std::cout << '\n';
+      std::cout << '\n';*/
     }
     if (higherPriorityArrived) {
       //add in overhead
@@ -211,7 +209,7 @@ Queue* PP(Queue* newProcessQueue) {
 
 
 
-      std::cout << "SWITCH\n";
+      /*std::cout << "SWITCH\n";
       std::cout << "TIME: " << time << std::endl;
 
       std::cout << "Ready Queue\n";
@@ -220,7 +218,7 @@ Queue* PP(Queue* newProcessQueue) {
       runningQueue->print();
       std::cout << "Done Queue\n";
       doneQueue->print();
-      std::cout << '\n';
+      std::cout << '\n';*/
     }
     if (runningQueueEmpty && readyQueue->size > 0) {
       runningQueue->Enqueue(readyQueue->front->data);
@@ -231,7 +229,7 @@ Queue* PP(Queue* newProcessQueue) {
       runningQueueEmpty = false;
 
 
-      std::cout << "RUN\n";
+      /*std::cout << "RUN\n";
       std::cout << "TIME: " << time << std::endl;
 
       std::cout << "Ready Queue\n";
@@ -240,7 +238,7 @@ Queue* PP(Queue* newProcessQueue) {
       runningQueue->print();
       std::cout << "Done Queue\n";
       doneQueue->print();
-      std::cout << '\n';
+      std::cout << '\n';*/
     }
 
     if (!higherPriorityArrived && !runningQueueEmpty) {
@@ -299,7 +297,7 @@ Queue* RR(Queue* newProcessQueue, int timeQuantum) {
       newProcessQueue->deQueue();
 
 
-      std::cout<<"ARRIVES\n";
+      /*std::cout<<"ARRIVES\n";
       std::cout << "TIME: " << time << std::endl;
       std::cout << "Ready Queue\n";
       readyQueue->print();
@@ -307,7 +305,7 @@ Queue* RR(Queue* newProcessQueue, int timeQuantum) {
       runningQueue->print();
       std::cout << "Done Queue\n";
       doneQueue->print();
-      std::cout << '\n';
+      std::cout << '\n';*/
 
     }
     if (processFinished) {
@@ -320,7 +318,7 @@ Queue* RR(Queue* newProcessQueue, int timeQuantum) {
       quantumDone = false;
 
 
-      std::cout << "FINISHED\n";
+      /*std::cout << "FINISHED\n";
       std::cout << "TIME: " << time << std::endl;
 
       std::cout << "Ready Queue\n";
@@ -329,7 +327,7 @@ Queue* RR(Queue* newProcessQueue, int timeQuantum) {
       runningQueue->print();
       std::cout << "Done Queue\n";
       doneQueue->print();
-      std::cout << '\n';
+      std::cout << '\n';*/
     }
     if (quantumDone) {
       //add in overhead
@@ -344,7 +342,7 @@ Queue* RR(Queue* newProcessQueue, int timeQuantum) {
       }
 
 
-      std::cout << "SWITCH\n";
+      /*std::cout << "SWITCH\n";
       std::cout << "TIME: " << time << std::endl;
 
       std::cout << "Ready Queue\n";
@@ -353,7 +351,7 @@ Queue* RR(Queue* newProcessQueue, int timeQuantum) {
       runningQueue->print();
       std::cout << "Done Queue\n";
       doneQueue->print();
-      std::cout << '\n';
+      std::cout << '\n';*/
     }
     if (runningQueueEmpty && readyQueue->size > 0) {
       runningQueue->Enqueue(readyQueue->front->data);
@@ -364,7 +362,7 @@ Queue* RR(Queue* newProcessQueue, int timeQuantum) {
       runningQueueEmpty = false;
 
 
-      std::cout << "RUN\n";
+      /*std::cout << "RUN\n";
       std::cout << "TIME: " << time << std::endl;
 
       std::cout << "Ready Queue\n";
@@ -373,7 +371,7 @@ Queue* RR(Queue* newProcessQueue, int timeQuantum) {
       runningQueue->print();
       std::cout << "Done Queue\n";
       doneQueue->print();
-      std::cout << '\n';
+      std::cout << '\n';*/
     }
 
     if (!quantumDone && !runningQueueEmpty) {

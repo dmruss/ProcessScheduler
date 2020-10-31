@@ -82,6 +82,7 @@ struct Queue {
     }
     avgBurst = avgBurst / size;
     avgWait = avgWait / size;
+    avgTurn = avgTurn / size;
     avgResponse = avgResponse / size;
 
     std::cout << "Average CPU burst time: " << avgBurst << '\t'
@@ -107,12 +108,12 @@ struct Queue {
       std::cout << current->data->pid << '\t'
                 << current->data->arrival << '\t'
                 << current->data->burst << '\t'
-                << current->data->priority << '\t'
+                << current->data->priority << '\t' << '\t'
                 << current->data->finish << '\t'
                 << current->data->wait << '\t'
-                << current->data->turnaround << '\t'
-                << current->data->response << '\t'
-                << current->data->contextSwitches << '\t'
+                << current->data->turnaround << '\t' << '\t'
+                << current->data->response << '\t' << '\t'
+                << current->data->contextSwitches
                 << std::endl;
       current = current->next;
     }
@@ -128,10 +129,8 @@ struct BurstPQueue : Queue {
   }
 
   void Enqueue(PCB* aPCB) {
-    std::cout << "Calling enqueue\n";
     Node* aNode = new Node(aPCB);
     if (front == NULL) {
-      std::cout<< "enqueue check 1\n";
       front = aNode;
       front->next = NULL;
       rear = front;
@@ -168,8 +167,9 @@ struct PriorityPQueue : Queue {
     if (front == NULL) {
       front = aNode;
       front->next = NULL;
+      rear = front;
     }
-    else if (front->data->priority < aNode->data->priority) {
+    else if (front->data->priority > aNode->data->priority) {
       aNode->next = front;
       front = aNode;
     }
@@ -180,6 +180,9 @@ struct PriorityPQueue : Queue {
       }
       aNode->next = temp->next;
       temp->next = aNode;
+      if (aNode->next == NULL) {
+        rear = aNode;
+      }
     }
     size += 1;
   }
