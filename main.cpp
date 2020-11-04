@@ -8,34 +8,51 @@
 Queue* ReadInput(std::string filename);
 
 
-int main() {
-  Queue* newProcessQueue = ReadInput("input100.txt");
-  std::cout << "Input Processes\n";
-  //newProcessQueue->print();
+int main(int argc, char* argv[]) {
+  Queue* newProcessQueue = new Queue();
 
-  std::cout << "FCFS\n";
-  Queue* finishedFCFS = Fcfs(newProcessQueue);
-  //finishedFCFS->print();
-  finishedFCFS->printStats();
-  std::cout << '\n';
+  if (argc == 3)
+  {
+    if (atoi(argv[2]) == 0) {
+      Queue* newProcessQueue = ReadInput(argv[1]);
+      std::cout << "FCFS\n";
+      Queue* finishedFCFS = Fcfs(newProcessQueue);
+      finishedFCFS->print();
+      finishedFCFS->printStats();
+      std::cout << '\n';
+    }
+    else if (atoi(argv[2]) == 1) {
+      std::cout << "SJF\n";
+      newProcessQueue = ReadInput(argv[1]);
+      Queue* finishedSJF = SJF(newProcessQueue);
+      finishedSJF->print();
+      finishedSJF->printStats();
+      std::cout << '\n';
 
-  std::cout << "SJF\n";
-  newProcessQueue = ReadInput("input100.txt");
-  Queue* finishedSJF = SJF(newProcessQueue);
-  //finishedSJF->print();
-  finishedSJF->printStats();
+    }
+    else if (atoi(argv[2]) == 2) {
+      std::cout << "PP\n";
+      newProcessQueue = ReadInput(argv[1]);
+      Queue* finishedPP = PP(newProcessQueue);
+      finishedPP->print();
+      finishedPP->printStats();
+      std::cout << '\n';
+    }else {
+      std::cout << "Unrecognized command\n";
+    }
 
-  std::cout << "PP\n";
-  newProcessQueue = ReadInput("input100.txt");
-  Queue* finishedPP = PP(newProcessQueue);
-  //finishedPP->print();
-  finishedPP->printStats();
+  }else {
 
-  std::cout << "RR\n";
-  newProcessQueue = ReadInput("input100.txt");
-  Queue* finishedRR = RR(newProcessQueue, 22);
-  //finishedRR->print();
-  finishedRR->printStats();
+
+    std::cout << "RR, Time Quantum: " << argv[3] << "\n";
+    newProcessQueue = ReadInput(argv[1]);
+    Queue* finishedRR12 = RR(newProcessQueue, atoi(argv[3]));
+    finishedRR12->print();
+    finishedRR12->printStats();
+    std::cout << '\n';
+
+
+}
 
 
   return 0;
